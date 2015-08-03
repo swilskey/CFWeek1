@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>79BD1E60-9257-4E77-BED1-FD4A1187F682</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Twitter Clone</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>33DD329FCA18A0E7173B5699AF0527C6CA62DD04</key>
+		<string>https://github.com/swilskey/CFWeek1.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Twitter Clone/Twitter Clone.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>33DD329FCA18A0E7173B5699AF0527C6CA62DD04</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/swilskey/CFWeek1.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>33DD329FCA18A0E7173B5699AF0527C6CA62DD04</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>33DD329FCA18A0E7173B5699AF0527C6CA62DD04</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CFWeek1</string>
+		</dict>
+	</array>
+</dict>
+</plist>

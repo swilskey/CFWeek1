@@ -9,17 +9,54 @@
 import UIKit
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+  
+  @IBOutlet weak var tableView: UITableView!
+  
+  var posts = [Post]()
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    if let filepath = NSBundle.mainBundle().pathForResource("test", ofType: "json") {
+      println(filepath)
+      
+      if let data = NSData(contentsOfFile: filepath) {
+        if let posts = TestJSONParser.postsFromJSONData(data) {
+          self.posts = posts
+        }
+      }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
+    
+    tableView.delegate = self
+    tableView.dataSource = self
+    
+  }
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+  }
+  
 }
 
+// MARK: - UITableViewDataSource
+extension ViewController: UITableViewDataSource {
+  
+  func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! UITableViewCell
+    let post = posts[indexPath.row]
+    cell.textLabel?.text = post.name
+    
+    return cell
+  }
+  
+  func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return posts.count
+  }
+}
+
+// MARK: - UITableViewDelegate
+extension ViewController: UITableViewDelegate {
+  
+}
