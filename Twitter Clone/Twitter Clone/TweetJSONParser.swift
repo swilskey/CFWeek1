@@ -12,36 +12,34 @@ class TweetJSONParser {
   
   class func tweetsFromJSONData(jsonData: NSData) -> [Tweet]? {
     
+    var error: NSError?
     
-    return nil
-  }
-}
-
-// Example:
-
-class TestJSONParser {
-  class func postsFromJSONData(jsonData: NSData) -> [Post]? {
-    
-    var error : NSError? // Error Variable
-    
-    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [String : AnyObject],
-      data = rootObject["data"] as? [[String : AnyObject]] {
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [AnyObject] {
+      
+      var tweets = [Tweet]()
+      for data in rootObject {
         
-        var posts = [Post]()
-        
-        for postObject in data {
-          if let firstName = postObject["name"] as? String {
-            println(firstName)
-            let post = Post(name: firstName)
-            posts.append(post)
-          }
+        if let text = data["text"] as? String,
+          user = data["user"] as? [String: AnyObject],
+          id = data["id"] as? Int {
+            
+            if let username = user["name"] as? String,
+              profileImageURL = user["profile_image_url_https"] as? String {
+                
+                let tweet = Tweet(text: text, username: username, id: String(id), profileImageURL: profileImageURL)
+                tweets.append(tweet)
+                
+            }
         }
-        return posts
+      }
+      
+      return tweets
     }
     
     if let error = error {
       
     }
+    
     return nil
   }
 }

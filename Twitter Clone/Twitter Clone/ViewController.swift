@@ -12,21 +12,18 @@ class ViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   
-  var posts = [Post]()
+  var tweets = [Tweet]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    if let filepath = NSBundle.mainBundle().pathForResource("test", ofType: "json") {
-      println(filepath)
-      
+    if let filepath = NSBundle.mainBundle().pathForResource("tweet", ofType: "json") {
       if let data = NSData(contentsOfFile: filepath) {
-        if let posts = TestJSONParser.postsFromJSONData(data) {
-          self.posts = posts
+        if let tweets = TweetJSONParser.tweetsFromJSONData(data) {
+          self.tweets = tweets
         }
       }
     }
-    
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -45,14 +42,15 @@ extension ViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! UITableViewCell
-    let post = posts[indexPath.row]
-    cell.textLabel?.text = post.name
+    let tweet = tweets[indexPath.row]
+    cell.textLabel?.text = tweet.text
     
     return cell
   }
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return posts.count
+    
+    return tweets.count
   }
 }
 
