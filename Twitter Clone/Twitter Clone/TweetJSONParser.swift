@@ -14,18 +14,17 @@ class TweetJSONParser {
     
     var error: NSError?
     
-    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [AnyObject] {
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [[String: AnyObject]] {
       
       var tweets = [Tweet]()
       for data in rootObject {
         if let text = data["text"] as? String,
+          id = data["id_str"] as? String,
           user = data["user"] as? [String: AnyObject],
-          id = data["id"] as? Int {
-            if let username = user["name"] as? String,
-              profileImageURL = user["profile_image_url_https"] as? String {
-                let tweet = Tweet(text: text, username: username, id: String(id), profileImageURL: profileImageURL)
-                tweets.append(tweet)
-            }
+          username = user["name"] as? String,
+          profileImageURL = user["profile_image_url_https"] as? String {
+            let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL)
+            tweets.append(tweet)
         }
       }
       

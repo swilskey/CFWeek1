@@ -17,23 +17,38 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    LoginService.loginForTwitter { (errorDescription, account) -> (Void) in
+      if let errorDescription = errorDescription {
+        println(errorDescription)
+      }
+      if let account = account {
+        TwitterService.tweetsFromHomeTimeline(account, completionHandler: { (errorDescription, tweets) -> (Void) in
+          if let tweets = tweets {
+
+            NSOperationQueue.mainQueue().addOperationWithBlock() { () -> Void in
+              self.tweets = tweets
+              self.tableView.reloadData()
+            }
+          }
+        })
+      }
+    }
+    
+    /*
     if let filepath = NSBundle.mainBundle().pathForResource("tweet", ofType: "json") {
       if let data = NSData(contentsOfFile: filepath) {
         if let tweets = TweetJSONParser.tweetsFromJSONData(data) {
           self.tweets = tweets
         }
       }
-    }
+    }*/
     
-    tableView.delegate = self
     tableView.dataSource = self
-    
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
-  
 }
 
 // MARK: - UITableViewDataSource
@@ -51,9 +66,4 @@ extension ViewController: UITableViewDataSource {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets.count
   }
-}
-
-// MARK: - UITableViewDelegate
-extension ViewController: UITableViewDelegate {
-  
 }
