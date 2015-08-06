@@ -113,23 +113,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AQp-7c-iFT">
-                                <rect key="frame" x="16" y="28" width="568" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSI-KO-eCV">
+                                <rect key="frame" x="16" y="72" width="42" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOZ-Vu-Dvf">
+                                <rect key="frame" x="16" y="100" width="568" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajT-Us-KVJ">
+                                <rect key="frame" x="32" y="128" width="536" height="64.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WPj-f8-7Aj">
+                                        <rect key="frame" x="8" y="8" width="42" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uBx-Sr-kbB">
+                                        <rect key="frame" x="8" y="36" width="520" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="uBx-Sr-kbB" firstAttribute="top" secondItem="WPj-f8-7Aj" secondAttribute="bottom" constant="8" id="3ZF-Ck-xv4"/>
+                                    <constraint firstAttribute="trailing" secondItem="uBx-Sr-kbB" secondAttribute="trailing" constant="8" id="Zcf-vV-aJq"/>
+                                    <constraint firstAttribute="bottom" secondItem="uBx-Sr-kbB" secondAttribute="bottom" constant="8" id="Zo8-mQ-0bp"/>
+                                    <constraint firstItem="WPj-f8-7Aj" firstAttribute="top" secondItem="ajT-Us-KVJ" secondAttribute="topMargin" id="dgw-tV-NYI"/>
+                                    <constraint firstItem="WPj-f8-7Aj" firstAttribute="leading" secondItem="ajT-Us-KVJ" secondAttribute="leadingMargin" id="kvO-Wh-cWB"/>
+                                    <constraint firstItem="WPj-f8-7Aj" firstAttribute="leading" secondItem="uBx-Sr-kbB" secondAttribute="leading" id="vrc-UQ-e9S"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="AQp-7c-iFT" firstAttribute="trailing" secondItem="WkP-CG-3HW" secondAttribute="trailingMargin" id="6R9-jc-HNn"/>
-                            <constraint firstItem="AQp-7c-iFT" firstAttribute="leading" secondItem="WkP-CG-3HW" secondAttribute="leadingMargin" id="Z2K-Zr-HP7"/>
-                            <constraint firstItem="AQp-7c-iFT" firstAttribute="top" secondItem="R3A-ED-ah0" secondAttribute="bottom" constant="8" id="iSL-Bj-SW7"/>
+                            <constraint firstItem="wOZ-Vu-Dvf" firstAttribute="top" secondItem="rSI-KO-eCV" secondAttribute="bottom" constant="8" id="05S-JH-Ee3"/>
+                            <constraint firstItem="wOZ-Vu-Dvf" firstAttribute="trailing" secondItem="WkP-CG-3HW" secondAttribute="trailingMargin" id="2es-iA-EMf"/>
+                            <constraint firstItem="wOZ-Vu-Dvf" firstAttribute="leading" secondItem="rSI-KO-eCV" secondAttribute="leading" id="3Mv-1M-4Oo"/>
+                            <constraint firstItem="rSI-KO-eCV" firstAttribute="leading" secondItem="WkP-CG-3HW" secondAttribute="leadingMargin" id="8vZ-N9-hdJ"/>
+                            <constraint firstItem="rSI-KO-eCV" firstAttribute="top" secondItem="R3A-ED-ah0" secondAttribute="bottom" constant="8" id="9MQ-1E-BVp"/>
+                            <constraint firstItem="Kkt-pB-9f0" firstAttribute="top" secondItem="ajT-Us-KVJ" secondAttribute="bottom" constant="8" id="blQ-JH-tfr"/>
+                            <constraint firstItem="ajT-Us-KVJ" firstAttribute="top" secondItem="wOZ-Vu-Dvf" secondAttribute="bottom" constant="8" id="fBR-A2-7Uj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ajT-Us-KVJ" secondAttribute="trailing" constant="16" id="nTO-MR-v8F"/>
+                            <constraint firstItem="ajT-Us-KVJ" firstAttribute="leading" secondItem="WkP-CG-3HW" secondAttribute="leadingMargin" constant="16" id="w80-9s-L5i"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="blQ-JH-tfr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <connections>
-                        <outlet property="senderLabel" destination="AQp-7c-iFT" id="bMB-Se-CpQ"/>
+                        <outlet property="quoteSenderLabel" destination="WPj-f8-7Aj" id="yE1-d0-V99"/>
+                        <outlet property="quoteTextLabel" destination="uBx-Sr-kbB" id="Cir-xe-VPC"/>
+                        <outlet property="quoteView" destination="ajT-Us-KVJ" id="eNX-xs-hhu"/>
+                        <outlet property="senderLabel" destination="rSI-KO-eCV" id="DRa-6H-dFa"/>
+                        <outlet property="textLabel" destination="wOZ-Vu-Dvf" id="c62-fM-LMq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Zd-Ml-Igt" userLabel="First Responder" sceneMemberID="firstResponder"/>

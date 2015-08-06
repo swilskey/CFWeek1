@@ -18,6 +18,10 @@ class TweetJSONParser {
       
       var tweets = [Tweet]()
       for data in rootObject {
+        
+        var quotedTweet: [String:String]? = nil
+        var origTweet: [String:String]? = nil
+        
         if let text = data["text"] as? String,
           id = data["id_str"] as? String,
           user = data["user"] as? [String: AnyObject],
@@ -26,14 +30,17 @@ class TweetJSONParser {
             if let retweetedStatus = data["retweeted_status"] as? [String: AnyObject],
               origText = retweetedStatus["text"] as? String,
               origUser = retweetedStatus["user"] as? [String: AnyObject],
-              origUsername = user["name"] as? String {
-                let origTweet = ["user": origUsername, "text": origText]
-                let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, retweeted: true, origTweet: origTweet)
-                tweets.append(tweet)
-            } else {
-              let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, retweeted: false,origTweet: nil)
-              tweets.append(tweet)
+              origUsername = origUser["name"] as? String {
+                origTweet = ["username": origUsername, "text": origText]
             }
+            if let quotedStatus = data["quoted_status"] as? [String: AnyObject],
+              quoteText = quotedStatus["text"] as? String,
+              quoteUser = quotedStatus["user"] as? [String: AnyObject],
+              quoteUsername = quoteUser["name"] as? String {
+                quotedTweet = ["username": quoteUsername, "text": quoteText]
+            }
+            let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, origTweet: origTweet, quotedTweet: quotedTweet)
+            tweets.append(tweet)
         }
       }
       
