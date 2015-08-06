@@ -55,8 +55,8 @@ fizzbuzz()
 *
 */
 
-func hiCount(string: String){
-  let hi = "hi"
+func hiCount(string: String, selection: String){
+  
   var words = string.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
   var wordDictionary = [String: Int]()
   
@@ -67,10 +67,10 @@ func hiCount(string: String){
       wordDictionary[word] = 1
     }
   }
-  println("There are \(wordDictionary[hi]!) hi's in the string")
+  println("There are \(wordDictionary[selection]!) hi's in the string")
 }
 
-hiCount("hi this is hi")
+hiCount("hi this is hi", "hi")
 
 /*
 * Thursday

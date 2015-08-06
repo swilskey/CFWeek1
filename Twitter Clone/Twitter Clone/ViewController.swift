@@ -14,15 +14,27 @@ class ViewController: UIViewController {
   
   var tweets = [Tweet]()
   
+  
+  lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+    return refreshControl
+    }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    tableView.estimatedRowHeight = 85
+    tableView.rowHeight = UITableViewAutomaticDimension
+    self.tableView.addSubview(self.refreshControl)
     
     LoginService.loginForTwitter { (errorDescription, account) -> (Void) in
       if let errorDescription = errorDescription {
         println(errorDescription)
       }
       if let account = account {
-        TwitterService.tweetsFromHomeTimeline(account, completionHandler: { (errorDescription, tweets) -> (Void) in
+        TwitterService.sharedService.account = account
+        TwitterService.tweetsFromHomeTimeline(){ (errorDescription, tweets) -> (Void) in
           if let tweets = tweets {
 
             NSOperationQueue.mainQueue().addOperationWithBlock() { () -> Void in
@@ -30,24 +42,42 @@ class ViewController: UIViewController {
               self.tableView.reloadData()
             }
           }
-        })
-      }
-    }
-    
-    /*
-    if let filepath = NSBundle.mainBundle().pathForResource("tweet", ofType: "json") {
-      if let data = NSData(contentsOfFile: filepath) {
-        if let tweets = TweetJSONParser.tweetsFromJSONData(data) {
-          self.tweets = tweets
         }
       }
-    }*/
+    }
     
     tableView.dataSource = self
   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
+  }
+  
+  func handleRefresh(refreshControl: UIRefreshControl) {
+    LoginService.loginForTwitter { (errorDescription, account) -> (Void) in
+      if let errorDescription = errorDescription {
+        println(errorDescription)
+      }
+      if let account = account {
+        TwitterService.tweetsFromHomeTimeline() { (errorDescription, tweets) -> (Void) in
+          if let tweets = tweets {
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              self.tweets = tweets
+              self.tableView.reloadData()
+            })
+          }
+        }
+      }
+    }
+    self.tableView.reloadData()
+    refreshControl.endRefreshing()
+  }
+  
+  // Mark: - Navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let viewController = segue.destinationViewController as! TweetViewController
+    let selectedTweet = tableView.indexPathForSelectedRow()!.row
+    viewController.tweet = tweets[selectedTweet]
   }
 }
 
@@ -56,9 +86,10 @@ extension ViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
-    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! UITableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
     let tweet = tweets[indexPath.row]
-    cell.textLabel?.text = tweet.text
+    cell.usernameLabel.text = tweet.username
+    cell.tweetLabel.text = tweet.text
     
     return cell
   }

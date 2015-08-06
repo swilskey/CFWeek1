@@ -23,10 +23,20 @@ class TweetJSONParser {
           user = data["user"] as? [String: AnyObject],
           username = user["name"] as? String,
           profileImageURL = user["profile_image_url_https"] as? String {
-            let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL)
-            tweets.append(tweet)
+            if let retweetedStatus = data["retweeted_status"] as? [String: AnyObject],
+              origText = retweetedStatus["text"] as? String,
+              origUser = retweetedStatus["user"] as? [String: AnyObject],
+              origUsername = user["name"] as? String {
+                let origTweet = ["user": origUsername, "text": origText]
+                let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, retweeted: true, origTweet: origTweet)
+                tweets.append(tweet)
+            } else {
+              let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, retweeted: false,origTweet: nil)
+              tweets.append(tweet)
+            }
         }
       }
+      
       
       return tweets
     }

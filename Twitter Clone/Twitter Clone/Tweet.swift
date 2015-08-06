@@ -13,4 +13,13 @@ struct Tweet {
   let username: String
   let id: String
   let profileImageURL: String
+  let retweeted: Bool
+  
+  /*
+  let orgText: String?
+  let origUsername: String?
+  let origId: String?
+  let origProfileImageURL: String?
+  */
+  let origTweet: [String:String]?
 }
