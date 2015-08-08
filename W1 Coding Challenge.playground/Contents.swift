@@ -104,26 +104,24 @@ removeX("xthixs isx testing x removal ax testx")
 *
 */
 
-class MyStack {
+class MyQueue {
   
-  private var stack = [Int]()
+  private var queue = [Int]()
   
-  func push(add: Int) {
-    stack.append(add)
+  func enqueue(add: Int) {
+    queue.append(add)
   }
   
-  func pop() {
-    stack.removeLast()
+  func dequeue() -> Int {
+    let item = queue[0]
+    queue.removeAtIndex(0)
+    return item
   }
   
 }
+let queue = MyQueue()
+queue.enqueue(1)
+queue.enqueue(4)
+queue.enqueue(55)
 
-var stack = MyStack()
-
-stack.push(22)
-stack.push(42)
-stack.push(52)
-
-stack.pop()
-
-
+queue.dequeue()

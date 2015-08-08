@@ -26,12 +26,14 @@ class TweetJSONParser {
           id = data["id_str"] as? String,
           user = data["user"] as? [String: AnyObject],
           username = user["name"] as? String,
-          profileImageURL = user["profile_image_url_https"] as? String {
+          profileImageURL = user["profile_image_url_https"] as? String,
+          userId = user["id_str"] as? String {
             if let retweetedStatus = data["retweeted_status"] as? [String: AnyObject],
               origText = retweetedStatus["text"] as? String,
               origUser = retweetedStatus["user"] as? [String: AnyObject],
-              origUsername = origUser["name"] as? String {
-                origTweet = ["username": origUsername, "text": origText]
+              origUsername = origUser["name"] as? String,
+              origProfileImageURL = origUser["profile_image_url_https"] as? String {
+                origTweet = ["username": origUsername, "text": origText, "profileImageURL": origProfileImageURL]
             }
             if let quotedStatus = data["quoted_status"] as? [String: AnyObject],
               quoteText = quotedStatus["text"] as? String,
@@ -39,7 +41,7 @@ class TweetJSONParser {
               quoteUsername = quoteUser["name"] as? String {
                 quotedTweet = ["username": quoteUsername, "text": quoteText]
             }
-            let tweet = Tweet(text: text, username: username, id: id, profileImageURL: profileImageURL, origTweet: origTweet, quotedTweet: quotedTweet)
+            let tweet = Tweet(text: text, username: username, id: id, userId: userId, profileImageURL: profileImageURL, profileImage: nil, origTweet: origTweet, quotedTweet: quotedTweet)
             tweets.append(tweet)
         }
       }
@@ -48,6 +50,18 @@ class TweetJSONParser {
       return tweets
     }
     
+    return nil
+  }
+  
+  class func userImagesFromJSONData(jsonData: NSData) -> String? {
+    var error: NSError?
+    
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [String: AnyObject],
+      sizes = rootObject["sizes"] as? [String: AnyObject],
+      size = sizes["mobile_retina"] as? [String: AnyObject],
+      url = size["url"] as? String {
+        return url
+    }
     return nil
   }
 }

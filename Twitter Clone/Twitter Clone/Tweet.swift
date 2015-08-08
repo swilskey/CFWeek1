@@ -6,13 +6,16 @@
 //  Copyright (c) 2015 Wilskey Labs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Tweet {
   let text: String
   let username: String
   let id: String
+  let userId: String
   let profileImageURL: String
+  
+  var profileImage: UIImage?
   
   let origTweet: [String:String]?
   let quotedTweet: [String:String]?

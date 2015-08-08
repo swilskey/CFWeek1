@@ -10,28 +10,41 @@ import UIKit
 
 class TweetViewController: UIViewController {
   
+  @IBOutlet weak var retweetLabel: UILabel!
   @IBOutlet weak var senderLabel: UILabel!
   @IBOutlet weak var textLabel: UILabel!
   @IBOutlet weak var quoteView: UIView!
   @IBOutlet weak var quoteSenderLabel: UILabel!
   @IBOutlet weak var quoteTextLabel: UILabel!
+  @IBOutlet weak var profileImage: UIButton!
   
   var tweet: Tweet?
+  let imageQueue = NSOperationQueue()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    quoteView.layer.cornerRadius = 5
-    quoteView.hidden = true
     
+    quoteView.layer.cornerRadius = 5
+    retweetLabel.hidden = true
+    quoteView.hidden = true
     senderLabel.text = tweet?.username
     textLabel.text = tweet?.text
-    senderLabel.textColor = UIColor.redColor()
+    profileImage.setImage(tweet?.profileImage, forState: .Normal)
     
     if let origTweet = tweet?.origTweet {
+      retweetLabel.hidden = false
+      retweetLabel.text = "Retweeted by \(tweet!.username)"
       senderLabel.textColor = UIColor.blueColor()
       senderLabel.text = origTweet["username"]
-      println(origTweet["username"])
       textLabel.text = origTweet["text"]
+      
+      imageQueue.addOperationWithBlock { () -> Void in
+        if let image = ImageDownloader.downloadImage(origTweet["profileImageURL"]!, size: CGSize(width: 80, height: 80)) {
+          NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+            self.profileImage.setImage(image, forState: .Normal)
+          })
+        }
+      }
     }
     
     if let quotedTweet = tweet?.quotedTweet {
@@ -41,10 +54,18 @@ class TweetViewController: UIViewController {
     }
   }
   // Do any additional setup after loading the view.
-
-
-override func didReceiveMemoryWarning() {
-  super.didReceiveMemoryWarning()
-  // Dispose of any resources that can be recreated.
+  
+  
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
   }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let userViewController = segue.destinationViewController as! UserViewController
+    
+    userViewController.userId = tweet?.userId
+    userViewController.username = tweet?.username
+  }
+  
 }
