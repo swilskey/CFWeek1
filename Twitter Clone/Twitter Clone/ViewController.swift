@@ -92,7 +92,7 @@ extension ViewController: UITableViewDataSource {
   
   func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCellWithIdentifier("TweetCell", forIndexPath: indexPath) as! TweetCell
-    cell.imageView?.image = nil
+    cell.profileImageView.image = UIImage(named: "twitter.png")
     cell.tag++
     
     let tag = cell.tag
@@ -101,6 +101,7 @@ extension ViewController: UITableViewDataSource {
     if imageCache[tweet.profileImageURL] != nil {
       if cell.tag == tag {
         cell.profileImageView.image = imageCache[tweet.profileImageURL]
+        tweet.profileImage = imageCache[tweet.profileImageURL]
       }
     } else {
       imageQueue.addOperationWithBlock { () -> Void in

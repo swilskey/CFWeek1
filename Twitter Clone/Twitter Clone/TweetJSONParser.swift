@@ -53,6 +53,25 @@ class TweetJSONParser {
     return nil
   }
   
+  class func userFromJSONData(jsonData: NSData) -> User? {
+    var error: NSError?
+    
+    if let rootObject = NSJSONSerialization.JSONObjectWithData(jsonData, options: nil, error: &error) as? [String : AnyObject] {
+
+      if let description = rootObject["description"] as? String,
+        id = rootObject["id_str"] as? String,
+        followersCount = rootObject["followers_count"] as? Int,
+        username = rootObject["name"] as? String,
+        profileImageURL = rootObject["profile_image_url"] as? String,
+        bannerImageURL = rootObject["profile_banner_url"] as? String {
+          let user = User(username: username, id: id, followers: followersCount, description: description, bannerImageURL: bannerImageURL, profileImageURL: profileImageURL)
+          return user
+      }
+    }
+    
+    return nil
+  }
+  
   class func userImagesFromJSONData(jsonData: NSData) -> String? {
     var error: NSError?
     

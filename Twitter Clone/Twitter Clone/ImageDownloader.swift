@@ -11,8 +11,8 @@ import UIKit
 class ImageDownloader {
   
   class func downloadImage(imageURLString: String, size: CGSize) -> UIImage? {
-    
-    if let imageURL = NSURL(string: imageURLString),
+    println(imageURLString)
+    if let imageURL = NSURL(string: imageURLString) ,
       imageData = NSData(contentsOfURL: imageURL),
       image = UIImage(data: imageData) {
         var newSize = CGSize()

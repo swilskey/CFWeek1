@@ -9,5 +9,11 @@
 import Foundation
 
 struct User {
+  let username: String
+  let id: String
+  let followers: Int
+  let description: String
+  let bannerImageURL: String?
+  let profileImageURL: String
   
 }

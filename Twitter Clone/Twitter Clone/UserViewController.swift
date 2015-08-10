@@ -16,15 +16,24 @@ class UserViewController: UIViewController {
   @IBOutlet weak var usernameLableView: UILabel!
   
   var tweets = [Tweet]()
+  var user: User?
   var username: String?
   var userId: String?
   var imageCache = [String:UIImage]()
   let imageQueue = NSOperationQueue()
   
+  lazy var refreshControl: UIRefreshControl = {
+    let refreshControl = UIRefreshControl()
+    refreshControl.addTarget(self, action: "handleRefresh:", forControlEvents: UIControlEvents.ValueChanged)
+    return refreshControl
+    }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     tableView.dataSource = self
+    tableView.delegate = self
+    self.tableView.addSubview(self.refreshControl)
+    
     tableView.registerNib(UINib(nibName: "TweetCell", bundle: NSBundle.mainBundle()), forCellReuseIdentifier: "TweetCell")
     tableView.estimatedRowHeight = 75
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -42,11 +51,23 @@ class UserViewController: UIViewController {
             
             NSOperationQueue.mainQueue().addOperationWithBlock() { () -> Void in
               self.tweets = tweets
-              self.usernameLableView.text = self.username
+              //self.usernameLableView.text = self.username
               self.tableView.reloadData()
             }
           }
         }
+        
+        TwitterService.userProfile(self.userId!, completionHandler: { (errorDescription, user) -> (Void) in
+          if let errorDescription = errorDescription {
+            
+          }
+          if let user = user {
+            NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+              self.user = user
+              self.usernameLableView.text = self.user?.username
+            })
+          }
+        })
         TwitterService.userProfileBanner(self.userId!){ (errorDescription, imageURL) -> (Void) in
           if let errorDescription = errorDescription {
             println(errorDescription)
@@ -72,6 +93,26 @@ class UserViewController: UIViewController {
     // Dispose of any resources that can be recreated.
   }
   
+  func handleRefresh(refreshControl: UIRefreshControl) {
+    
+    TwitterService.tweetsFromUserTimeline(userId!, completionHandler:{ (errorDescription, tweets) -> (Void) in
+      if let tweets = tweets {
+        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+          self.tweets = tweets
+          self.tableView.reloadData()
+        })
+      }
+    })
+    
+    self.tableView.reloadData()
+    refreshControl.endRefreshing()
+  }
+  
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    let destination = segue.destinationViewController as! TweetViewController
+    let selectedTweet = tableView.indexPathForSelectedRow()!.row
+    destination.tweet = tweets[selectedTweet]
+  }
 }
 
 extension UserViewController: UITableViewDataSource {
@@ -89,7 +130,6 @@ extension UserViewController: UITableViewDataSource {
     cell.profileImageView.image = tweet.profileImage
     
     if imageCache[tweet.profileImageURL] != nil && cell.tag == tag {
-      println("used cache")
       cell.profileImageView.image = imageCache[tweet.profileImageURL]
       tweet.profileImage = imageCache[tweet.profileImageURL]
     } else {
@@ -112,5 +152,11 @@ extension UserViewController: UITableViewDataSource {
     cell.tweetLabel.text = tweet.text
     
     return cell
+  }
+}
+
+extension UserViewController: UITableViewDelegate {
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    performSegueWithIdentifier("TweetView", sender: self)
   }
 }

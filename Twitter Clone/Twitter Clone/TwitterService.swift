@@ -45,9 +45,9 @@ class TwitterService {
   
   class func tweetsFromUserTimeline(userID: String, completionHandler: (String?, [Tweet]?) -> (Void)) {
     let request = SLRequest(forServiceType: SLServiceTypeTwitter,
-                  requestMethod: SLRequestMethod.GET,
-                  URL: NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json"),
-                  parameters: ["user_id": userID])
+      requestMethod: SLRequestMethod.GET,
+      URL: NSURL(string: "https://api.twitter.com/1.1/statuses/user_timeline.json"),
+      parameters: ["user_id": userID])
     
     request.account = self.sharedService.account
     request.performRequestWithHandler { (data, response, error) -> Void in
@@ -58,6 +58,34 @@ class TwitterService {
         case 200...299:
           let tweets = TweetJSONParser.tweetsFromJSONData(data)
           completionHandler(nil, tweets)
+        case 300...399:
+          completionHandler("No New Data", nil)
+        case 400...499:
+          completionHandler("Error: Fix your request", nil)
+        case 500...599:
+          completionHandler("Internal Server Error", nil)
+        default:
+          completionHandler("Unknown Error", nil)
+        }
+      }
+    }
+  }
+  
+  class func userProfile(userID: String, completionHandler:(String?, User?) -> (Void)) {
+    let request = SLRequest(forServiceType: SLServiceTypeTwitter,
+      requestMethod: SLRequestMethod.GET,
+      URL: NSURL(string: "https://api.twitter.com/1.1/users/show.json"),
+      parameters: ["user_id": userID])
+    
+    request.account = self.sharedService.account
+    request.performRequestWithHandler { (data, response, error) -> Void in
+      if let error = error  {
+        completionHandler("Could not connect to server", nil)
+      } else {
+        switch response.statusCode {
+        case 200...299:
+          let user = TweetJSONParser.userFromJSONData(data)
+          completionHandler(nil, user)
         case 300...399:
           completionHandler("No New Data", nil)
         case 400...499:

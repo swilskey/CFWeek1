@@ -19,6 +19,7 @@ class TweetViewController: UIViewController {
   @IBOutlet weak var profileImage: UIButton!
   
   var tweet: Tweet?
+  var userImage: UIImage?
   let imageQueue = NSOperationQueue()
   
   override func viewDidLoad() {
