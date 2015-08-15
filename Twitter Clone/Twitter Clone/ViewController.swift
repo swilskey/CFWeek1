@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     
     tableView.estimatedRowHeight = 85
     tableView.rowHeight = UITableViewAutomaticDimension
-    self.tableView.addSubview(self.refreshControl)
+    tableView.addSubview(self.refreshControl)
     activityIndicator.startAnimating()
     
     // Logging into Twitter Account

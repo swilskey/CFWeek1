@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c6c1cb16-e70d-469c-a9d8-edefc29dbe33" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitter Clone.xcodeproj/project.xcworkspace/xcuserdata/Sam.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/Twitter Clone.xcodeproj/project.xcworkspace/xcuserdata/Sam.xcuserdatad/UserInterfaceState.xcuserstate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitter Clone/Base.lproj/Main.storyboard" afterPath="$PROJECT_DIR$/Twitter Clone/Base.lproj/Main.storyboard" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitter Clone/TweetCell.swift" afterPath="$PROJECT_DIR$/Twitter Clone/TweetCell.swift" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitter Clone/TweetViewController.swift" afterPath="$PROJECT_DIR$/Twitter Clone/TweetViewController.swift" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../W1 Coding Challenge.playground/playground.xcworkspace/xcuserdata/Sam.xcuserdatad/UserInterfaceState.xcuserstate" afterPath="$PROJECT_DIR$/../W1 Coding Challenge.playground/playground.xcworkspace/xcuserdata/Sam.xcuserdatad/UserInterfaceState.xcuserstate" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Twitter Clone/ViewController.swift" afterPath="$PROJECT_DIR$/Twitter Clone/ViewController.swift" />
     </list>
     <ignored path="Twitter Clone.iws" />
@@ -26,38 +24,7 @@
     <favorites_list name="Twitter Clone" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TweetViewController.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetViewController.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewController.swift" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Twitter Clone/ViewController.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6104651">
-              <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TweetCell.swift" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetCell.swift">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -306,6 +273,30 @@
     <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetCell.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Twitter Clone/ViewController.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetCell.swift">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
           <folding />
         </state>
@@ -325,26 +316,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetViewController.swift">
+    <entry file="file://$PROJECT_DIR$/Twitter Clone/ViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <caret line="39" column="38" selection-start-line="39" selection-start-column="38" selection-end-line="39" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetCell.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.3255814">
           <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Twitter Clone/ViewController.swift">
+    <entry file="file://$PROJECT_DIR$/Twitter Clone/TweetViewController.swift">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6104651">
-          <caret line="30" column="38" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
